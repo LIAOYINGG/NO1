@@ -5,164 +5,169 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="main-container" class="two-column-container">
-    <div id="left-sidebar">
+  <div id="page-container">
+    <div id="top-input-section">
       <h2>Step 2: Foresee Your Financial Pulse, Say Goodbye to Cash Crises (Level 2 - Cash Flow)</h2>
       <p>Profitability doesn't equal cash in hand! Cash flow disruption is the primary cause of 'sudden death' for SMEs. Input the following working capital data, and RationAI will help you foresee cash gaps 1-3 months in advance, identify key collection moments, and rationally arrange expenditures.</p>
-      
-      <div>
-        <label for="data-period">Data Period:</label>
-        <input type="text" id="data-period" name="data-period"><br>
-        
-        <label for="forecast-duration">Forecast Duration:</label>
-        <select id="forecast-duration" name="forecast-duration">
-          <option value="30">Next 30 days</option>
-          <option value="60">Next 60 days</option>
-          <option value="90">Next 90 days</option>
-        </select>
-      </div>
-      
-      <form id="core-data-input-form">
+      <!-- Form starts here, wrapping relevant parts of top-input-section and detailed-input-left -->
+      <form id="core-data-input-form"> 
+        <div>
+          <label for="data-period">Data Period:</label>
+          <input type="text" id="data-period" name="data-period"><br>
+          
+          <label for="forecast-duration">Forecast Duration:</label>
+          <select id="forecast-duration" name="forecast-duration">
+            <option value="30">Next 30 days</option>
+            <option value="60">Next 60 days</option>
+            <option value="90">Next 90 days</option>
+          </select>
+        </div>
         <div>
           <label for="opening-cash-balance">Opening Cash Balance:</label>
           <input type="number" id="opening-cash-balance" name="opening-cash-balance" placeholder="Enter amount">
           <span title="Includes bank deposits, cash on hand, etc.">(i)</span>
         </div>
-        
-        <h3>Accounts Receivable Aging Details</h3>
-        <div>
-          <label for="ar-not-due">Not Due:</label>
-          <input type="number" id="ar-not-due" name="ar-not-due" placeholder="Enter amount"><br>
-          <label for="ar-overdue-1-30">Overdue 1-30 days:</label>
-          <input type="number" id="ar-overdue-1-30" name="ar-overdue-1-30" placeholder="Enter amount"><br>
-          <label for="ar-overdue-31-60">Overdue 31-60 days:</label>
-          <input type="number" id="ar-overdue-31-60" name="ar-overdue-31-60" placeholder="Enter amount"><br>
-          <label for="ar-overdue-61-90">Overdue 61-90 days:</label>
-          <input type="number" id="ar-overdue-61-90" name="ar-overdue-61-90" placeholder="Enter amount"><br>
-          <label for="ar-overdue-90-plus">Overdue Over 90 days:</label>
-          <input type="number" id="ar-overdue-90-plus" name="ar-overdue-90-plus" placeholder="Enter amount"><br>
-          <span title="Explain the importance of aging and bad debt risk.">(i)</span>
-          <p style="font-style: italic;">Accurate aging is key to predicting collections and directly impacts the reliability of cash inflow forecasts. Neglecting this can lead to misjudgment of the cash chain!</p>
-        </div>
-        
-        <h3>Accounts Payable Aging Details</h3>
-        <div>
-          <label for="ap-not-due">Not Due:</label>
-          <input type="number" id="ap-not-due" name="ap-not-due" placeholder="Enter amount"><br>
-          <label for="ap-overdue-1-30">Overdue 1-30 days:</label>
-          <input type="number" id="ap-overdue-1-30" name="ap-overdue-1-30" placeholder="Enter amount"><br>
-          <label for="ap-overdue-31-60">Overdue 31-60 days:</label>
-          <input type="number" id="ap-overdue-31-60" name="ap-overdue-31-60" placeholder="Enter amount"><br>
-          <label for="ap-overdue-61-90">Overdue 61-90 days:</label>
-          <input type="number" id="ap-overdue-61-90" name="ap-overdue-61-90" placeholder="Enter amount"><br>
-          <label for="ap-overdue-90-plus">Overdue Over 90 days:</label>
-          <input type="number" id="ap-overdue-90-plus" name="ap-overdue-90-plus" placeholder="Enter amount"><br>
-          <span title="Explain its impact on cash outflow and supplier relationships.">(i)</span>
-        </div>
-        
-        <h3>Future Sales Forecast (Optional)</h3>
-        <div>
+        <div> <!-- Moved Future Sales Forecast here -->
+          <h3>Future Sales Forecast (Optional)</h3>
           <input type="text" id="future-sales-forecast" name="future-sales-forecast" placeholder="Enter estimated sales for next 1-3 months">
           <p>Incorporate your market judgment to make forecasts more realistic. Over-optimism or pessimism can lead to planning errors.</p>
         </div>
-        
-        <div>
-          <label for="undelivered-order-amount">Undelivered Order Amount (Backlog):</label>
-          <input type="number" id="undelivered-order-amount" name="undelivered-order-amount" placeholder="Enter amount">
-          <span title="Prompts its role in locking in future cash inflows.">(i)</span>
-        </div>
-        
-        <h3>Future Known Large Expenditures</h3>
-        <div>
-          <button type="button" id="add-expenditure-item">Add Expenditure Item</button>
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Item</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Example Row -->
-              <tr>
-                <td><input type="date" name="expenditure-date[]"></td>
-                <td><input type="text" name="expenditure-item[]" placeholder="Expense description"></td>
-                <td><input type="number" name="expenditure-amount[]" placeholder="Amount"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </form>
-      
-      <div id="data-import-area">
-        <h3>Or Batch Import via Template (Recommended)</h3>
-        <p>If you have detailed aging data or multiple planned expenditures, using a template is more efficient and reduces manual input errors.</p>
-        <button type="button">[Icon: Download] Download Cash Flow Analysis Data Template (.xlsx)</button>
-        <button type="button">[Icon: Upload] Upload Data File</button>
-      </div>
-      
-      <button type="submit" id="run-forecast-button" form="core-data-input-form" disabled>Run Cash Flow Forecast</button>
+       episodios <!-- This comment was in the previous SEARCH block, seems like a mistake. Removing it. -->
     </div>
-    <div id="right-sidebar">
-      <div id="right-sidebar-initial-state">
-        <p>Soon to be revealed: Future Cash Flow Curve Chart, Lowest Balance Early Warning, Key Turnover Indicators...</p>
-      </div>
-      <div id="right-sidebar-results-state">
-        <div class="metric-cards-container">
-          <div class="metric-card">
-            <p>Predicted Lowest Cash Balance</p>
-            <p>¥12,345.67</p>
-            <p>On 2024-08-15</p>
-          </div>
-          <div class="metric-card">
-            <p>Days Sales Outstanding (DSO)</p>
-            <p>45 days</p>
-            <p>Rather Long</p>
-            <p>↑ +2 days</p>
-          </div>
-          <div class="metric-card">
-            <p>Days Payable Outstanding (DPO)</p>
-            <p>30 days</p>
-            <p>Moderate</p>
-            <p>↓ -1 day</p>
-          </div>
-          <div class="metric-card">
-            <p>Cash Conversion Cycle (CCC)</p>
-            <p>60 days</p>
-            <p>Too long, high pressure on capital turnover</p>
-          </div>
-        </div>
 
-        <div id="cash-balance-chart-area">
-          <p>Cash Balance Trend Chart will be displayed here.</p>
-        </div>
-
-        <div class="insights-summary-container">
-          <div class="alerts-list">
-            <div class="alert-card alert-red">
-              <p>[Red Warning Icon] Alert: Cash is projected to fall below the safety line of ¥A million on Month X, Day X, reaching a minimum of ¥Y million. Please take immediate action, otherwise, you may be unable to pay matured debts!</p>
-            </div>
-            <div class="alert-card alert-yellow">
-              <p>[Yellow Attention Icon] Attention: DSO is Z days, far exceeding the industry average. Approximately ¥B million in funds are tied up in accounts receivable, increasing bad debt risk. Recommend strengthening collections and reviewing credit policies.</p>
-            </div>
-            <div class="alert-card alert-tip">
-              <p>[Tip Icon] Tip: Undelivered orders amount to ¥W million, an important future cash source. Please ensure timely delivery and collection.</p>
-            </div>
-          </div>
+    <div id="bottom-content-section" class="bottom-columns-container">
+      <div id="detailed-input-left">
+        <!-- Removed the redundant/incorrect form tag that was here -->
+          <h3>Accounts Receivable Aging Details</h3>
           <div>
-            <p>AI Summary Assessment: Overall cash flow risk is moderate. Key drivers are...</p>
+            <label for="ar-not-due">Not Due:</label>
+            <input type="number" id="ar-not-due" name="ar-not-due" placeholder="Enter amount"><br>
+            <label for="ar-overdue-1-30">Overdue 1-30 days:</label>
+            <input type="number" id="ar-overdue-1-30" name="ar-overdue-1-30" placeholder="Enter amount"><br>
+            <label for="ar-overdue-31-60">Overdue 31-60 days:</label>
+            <input type="number" id="ar-overdue-31-60" name="ar-overdue-31-60" placeholder="Enter amount"><br>
+            <label for="ar-overdue-61-90">Overdue 61-90 days:</label>
+            <input type="number" id="ar-overdue-61-90" name="ar-overdue-61-90" placeholder="Enter amount"><br>
+            <label for="ar-overdue-90-plus">Overdue Over 90 days:</label>
+            <input type="number" id="ar-overdue-90-plus" name="ar-overdue-90-plus" placeholder="Enter amount"><br>
+            <span title="Explain the importance of aging and bad debt risk.">(i)</span>
+            <p style="font-style: italic;">Accurate aging is key to predicting collections and directly impacts the reliability of cash inflow forecasts. Neglecting this can lead to misjudgment of the cash chain!</p>
           </div>
-        </div>
+          
+          <h3>Accounts Payable Aging Details</h3>
+          <div>
+            <label for="ap-not-due">Not Due:</label>
+            <input type="number" id="ap-not-due" name="ap-not-due" placeholder="Enter amount"><br>
+            <label for="ap-overdue-1-30">Overdue 1-30 days:</label>
+            <input type="number" id="ap-overdue-1-30" name="ap-overdue-1-30" placeholder="Enter amount"><br>
+            <label for="ap-overdue-31-60">Overdue 31-60 days:</label>
+            <input type="number" id="ap-overdue-31-60" name="ap-overdue-31-60" placeholder="Enter amount"><br>
+            <label for="ap-overdue-61-90">Overdue 61-90 days:</label>
+            <input type="number" id="ap-overdue-61-90" name="ap-overdue-61-90" placeholder="Enter amount"><br>
+            <label for="ap-overdue-90-plus">Overdue Over 90 days:</label>
+            <input type="number" id="ap-overdue-90-plus" name="ap-overdue-90-plus" placeholder="Enter amount"><br>
+            <span title="Explain its impact on cash outflow and supplier relationships.">(i)</span>
+          </div>
+          
+          <div>
+            <label for="undelivered-order-amount">Undelivered Order Amount (Backlog):</label>
+            <input type="number" id="undelivered-order-amount" name="undelivered-order-amount" placeholder="Enter amount">
+            <span title="Prompts its role in locking in future cash inflows.">(i)</span>
+          </div>
+          
+          <h3>Future Known Large Expenditures</h3>
+          <div>
+            <button type="button" id="add-expenditure-item">Add Expenditure Item</button>
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Item</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Example Row -->
+                <tr>
+                  <td><input type="date" name="expenditure-date[]"></td>
+                  <td><input type="text" name="expenditure-item[]" placeholder="Expense description"></td>
+                  <td><input type="number" name="expenditure-amount[]" placeholder="Amount"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div id="data-import-area">
+            <h3>Or Batch Import via Template (Recommended)</h3>
+            <p>If you have detailed aging data or multiple planned expenditures, using a template is more efficient and reduces manual input errors.</p>
+            <button type="button">[Icon: Download] Download Cash Flow Analysis Data Template (.xlsx)</button>
+            <button type="button">[Icon: Upload] Upload Data File</button>
+          </div>
+          
+          <button type="submit" id="run-forecast-button" disabled>Run Cash Flow Forecast</button>
+        </form> <!-- This is now the single closing tag for the main form -->
+      </div>
 
-        <div>
-          <p>Want to know the impact of improving DSO or DPO on cash flow? <a href="#">Try a simple simulation</a></p>
+      <div id="results-display-right">
+        <div id="right-sidebar-initial-state">
+          <p>Soon to be revealed: Future Cash Flow Curve Chart, Lowest Balance Early Warning, Key Turnover Indicators...</p>
         </div>
+        <div id="right-sidebar-results-state">
+          <div class="metric-cards-container">
+            <div class="metric-card">
+              <p>Predicted Lowest Cash Balance</p>
+              <p>¥12,345.67</p>
+              <p>On 2024-08-15</p>
+            </div>
+            <div class="metric-card">
+              <p>Days Sales Outstanding (DSO)</p>
+              <p>45 days</p>
+              <p>Rather Long</p>
+              <p>↑ +2 days</p>
+            </div>
+            <div class="metric-card">
+              <p>Days Payable Outstanding (DPO)</p>
+              <p>30 days</p>
+              <p>Moderate</p>
+              <p>↓ -1 day</p>
+            </div>
+            <div class="metric-card">
+              <p>Cash Conversion Cycle (CCC)</p>
+              <p>60 days</p>
+              <p>Too long, high pressure on capital turnover</p>
+            </div>
+          </div>
 
-        <div class="next-steps-buttons">
-          <button type="button">View High-Risk Accounts Receivable Details</button>
-          <button type="button">Analyze Impact of Inventory Backlog on Cash</button>
-          <button type="button">Learn How to Optimize Working Capital</button>
+          <div id="cash-balance-chart-area">
+            <p>Cash Balance Trend Chart will be displayed here.</p>
+          </div>
+
+          <div class="insights-summary-container">
+            <div class="alerts-list">
+              <div class="alert-card alert-red">
+                <p>[Red Warning Icon] Alert: Cash is projected to fall below the safety line of ¥A million on Month X, Day X, reaching a minimum of ¥Y million. Please take immediate action, otherwise, you may be unable to pay matured debts!</p>
+              </div>
+              <div class="alert-card alert-yellow">
+                <p>[Yellow Attention Icon] Attention: DSO is Z days, far exceeding the industry average. Approximately ¥B million in funds are tied up in accounts receivable, increasing bad debt risk. Recommend strengthening collections and reviewing credit policies.</p>
+              </div>
+              <div class="alert-card alert-tip">
+                <p>[Tip Icon] Tip: Undelivered orders amount to ¥W million, an important future cash source. Please ensure timely delivery and collection.</p>
+              </div>
+            </div>
+            <div>
+              <p>AI Summary Assessment: Overall cash flow risk is moderate. Key drivers are...</p>
+            </div>
+          </div>
+
+          <div>
+            <p>Want to know the impact of improving DSO or DPO on cash flow? <a href="#">Try a simple simulation</a></p>
+          </div>
+
+          <div class="next-steps-buttons">
+            <button type="button">View High-Risk Accounts Receivable Details</button>
+            <button type="button">Analyze Impact of Inventory Backlog on Cash</button>
+            <button type="button">Learn How to Optimize Working Capital</button>
+          </div>
         </div>
       </div>
     </div>

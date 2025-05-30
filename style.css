@@ -7,7 +7,7 @@ body {
     color: #333;
 }
 
-#main-container { /* Applied to the main container div */
+#page-container { /* Changed from #main-container */
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
@@ -15,23 +15,31 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.two-column-container {
+/* Styles for the new layout */
+#top-input-section {
+    margin-bottom: 20px; /* Space between top section and bottom columns */
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.bottom-columns-container {
     display: flex;
     justify-content: space-between;
 }
 
-#left-sidebar {
-    width: 40%;
-    padding: 20px;
-    border-right: 1px solid #ddd;
+#detailed-input-left {
+    width: 40%; /* Or adjust as needed */
+    padding-right: 20px; /* Add some space between the columns */
+    /* border-right: 1px solid #ddd; No border needed if right side has its own padding */
 }
 
-#right-sidebar {
-    width: 58%;
-    padding: 20px;
+#results-display-right {
+    width: 58%; /* Or adjust as needed */
+    padding-left: 20px; /* Add some space from the left column */
 }
 
-/* General Typography & Elements */
+
+/* General Typography & Elements - largely unchanged, but review context if issues arise */
 h1, h2, h3 {
     color: #333;
     margin-top: 10px;
@@ -99,7 +107,10 @@ button:hover, input[type="submit"]:hover {
 }
 
 /* Left Sidebar Specifics */
-#core-data-input-form span[title] { /* Info icons */
+/* Left Sidebar Specifics are now Top Input or Detailed Input Specifics */
+/* Info icons - check if they are in top or detailed */
+#top-input-section span[title], 
+#detailed-input-left span[title] { 
     font-size: 0.9em;
     color: #007bff;
     cursor: help;
@@ -118,43 +129,44 @@ p[style*="font-style: italic;"] { /* More specific selector might be needed if y
     margin-bottom: 15px;
 }
 
-
-#add-expenditure-item {
+/* Targeting the table within the form, now potentially in #detailed-input-left */
+#detailed-input-left #add-expenditure-item {
     background-color: #17a2b8; /* Info blue */
 }
-#add-expenditure-item:hover {
+#detailed-input-left #add-expenditure-item:hover {
     background-color: #117a8b;
 }
 
-#core-data-input-form table {
+#detailed-input-left table { /* Ensure this targets the expenditures table */
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
     margin-bottom: 15px;
 }
 
-#core-data-input-form th, #core-data-input-form td {
+#detailed-input-left table th, 
+#detailed-input-left table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-#core-data-input-form th {
+#detailed-input-left table th {
     background-color: #f2f2f2;
 }
 
-#data-import-area button {
+#detailed-input-left #data-import-area button { /* Target buttons in data import area */
     display: block;
     margin-bottom: 10px;
     background-color: #6c757d; /* Secondary gray */
 }
-#data-import-area button:hover {
+#detailed-input-left #data-import-area button:hover {
     background-color: #545b62;
 }
 
 
-/* Right Sidebar Specifics */
-#right-sidebar-initial-state {
+/* Right Sidebar Specifics are now Results Display Right Specifics */
+#results-display-right #right-sidebar-initial-state {
     text-align: center;
     color: #777;
     padding: 50px 20px;
@@ -167,7 +179,7 @@ p[style*="font-style: italic;"] { /* More specific selector might be needed if y
     justify-content: center;
 }
 
-#right-sidebar-results-state {
+#results-display-right #right-sidebar-results-state {
     display: none; /* Initially hidden */
 }
 
@@ -272,13 +284,18 @@ p[style*="font-style: italic;"] { /* More specific selector might be needed if y
 
 /* Responsive adjustments (optional basic example) */
 @media (max-width: 768px) {
-    .two-column-container {
+    .bottom-columns-container { /* Adjust for new layout */
         flex-direction: column;
     }
-    #left-sidebar, #right-sidebar {
-        width: 100%;
+    #detailed-input-left, #results-display-right {
+        width: 100% !important; /* Override width for stacking */
+        padding-right: 0;
+        padding-left: 0;
         border-right: none;
-        border-bottom: 1px solid #ddd; /* Add separator for stacked view */
+        border-bottom: 1px solid #ddd; 
+    }
+    #results-display-right {
+        border-bottom: none; /* No bottom border for the last stacked item */
     }
     .metric-card {
         flex-basis: 100%; /* Full width on smaller screens */
